@@ -1,0 +1,93 @@
+func Narcissistic(numData int) bool {
+	numOfDigit := countDigits(numData)
+	sumDigit := 0
+	tempData := numData
+	for tempData > 0 {
+		singleNum := tempData % 10
+		sumDigit += int(math.Pow(float64(singleNum), float64(numOfDigit)))
+		tempData /= 10
+	}
+
+	if numData == sumDigit {
+		return true
+	}
+
+	return false
+}
+
+func countDigits(numData int) (res int) {
+	for numData > 0 {
+		numData = numData / 10
+		res++
+	}
+
+	return res
+}
+
+func ParityOutlier(arrNum []int) interface{} {
+	countOdd := 0
+	oddList := []int{}
+	countEven := 0
+	evenList := []int{}
+	isOddEven := 0
+
+	for _, v := range arrNum {
+		if v%2 == 0 {
+			countEven++
+			evenList = append(evenList, v)
+		} else {
+			countOdd++
+			oddList = append(oddList, v)
+		}
+
+		if countOdd > 0 && countEven > 0 && (countOdd > 1 || countEven > 1) {
+			if countOdd > countEven {
+				isOddEven = 1
+			}
+
+			if countEven > countOdd {
+				isOddEven = 2
+			}
+
+			break
+		}
+	}
+
+	if isOddEven == 1 {
+		return evenList[0]
+	}
+
+	if isOddEven == 2 {
+		return oddList[0]
+	}
+
+	return false
+}
+
+func FindNeedle(haystack []string, needle string) int {
+	for i, v := range haystack {
+		if v == needle {
+			return i
+		}
+	}
+
+	return 0
+}
+
+func BlueOcean(arr1, arr2 []int) (res []int) {
+	for _, v1 := range arr1 {
+		isSame := false
+		for _, v2 := range arr2 {
+			if v1 == v2 {
+				isSame = true
+				break
+			}
+		}
+
+		if !isSame {
+			res = append(res, v1)
+		}
+	}
+
+	return res
+}
